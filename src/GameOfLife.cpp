@@ -3,16 +3,24 @@
 
 #include <stdint.h>
 
-#define DATA_ROWS 32 // Y
-#define DATA_COLUMNS 64 // X
-#define DATA_COLUMN_BYTES 8 // DATA_COLUMNS/8
+// #define DATA_ROWS 32 // Y
+// #define DATA_COLUMNS 64 // X
+// #define DATA_COLUMN_BYTES 8 // DATA_COLUMNS/8
+// #define DATA_COLORS 3
 
-//template <uint8_t ROWS, uint8_t COLUMNS, uint8_t COLOR>
+template <uint8_t ROWS=32, uint8_t COLUMNS=64>
 class GameOfLife {
 
     public:
+    // Pointer to the data which should be rendered on the display
+    uint8_t (*visualData)[COLUMNS/8] = nullptr;
+
     // Temporary data for the next generation calculation
-    uint8_t nextGenData[DATA_ROWS][DATA_COLUMN_BYTES] = {};
+    uint8_t nextGenData[ROWS][COLUMNS/8] = {};
+
+    GameOfLife(uint8_t (*visualData)[COLUMNS/8]) {
+        this->visualData = visualData;
+    }
 
     /**
      * Set the bit on a given position to given value

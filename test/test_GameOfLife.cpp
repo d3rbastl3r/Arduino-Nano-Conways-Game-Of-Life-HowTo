@@ -3,9 +3,21 @@
 
 #include "GameOfLife.cpp"
 
+void GameOfLifeConstructor_should_set_visual_data_ptr_correctly() {
+    // given
+    uint8_t data[3][16][16/8] = {};
+
+    // when
+    GameOfLife<16, 16> gameOfLife(data[0]);
+    data[0][2][1] = 0b00110011;
+
+    // then
+    TEST_ASSERT_EQUAL(gameOfLife.visualData[2][1], data[0][2][1]);
+}
+
 void setNextGenBit_should_set_given_value_on_the_given_position() {
     // given
-    GameOfLife gameOfLife;
+    GameOfLife<> gameOfLife(nullptr);
     gameOfLife.nextGenData[0][0] = 0b00110011;
 
     // when
@@ -24,6 +36,8 @@ void setNextGenBit_should_set_given_value_on_the_given_position() {
 
 int main(int argc, char **argv) {
     UNITY_BEGIN();
+
+    RUN_TEST(GameOfLifeConstructor_should_set_visual_data_ptr_correctly);
 
     RUN_TEST(setNextGenBit_should_set_given_value_on_the_given_position);
     
