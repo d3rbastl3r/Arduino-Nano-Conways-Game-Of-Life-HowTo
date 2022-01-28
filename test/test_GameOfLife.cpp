@@ -3,21 +3,29 @@
 
 #include "GameOfLife.cpp"
 
-void test_getNumber_should_return_number_seven() {
+void setNextGenBit_should_set_given_value_on_the_given_position() {
     // given
     GameOfLife gameOfLife;
+    gameOfLife.nextGenData[0][0] = 0b00110011;
 
     // when
-    uint8_t result = gameOfLife.getNumber();
+    gameOfLife.setNextGenBit(0, 0, 1);
+    gameOfLife.setNextGenBit(0, 1, 0);
+    gameOfLife.setNextGenBit(0, 2, 1);
+    gameOfLife.setNextGenBit(0, 3, 0);
+    gameOfLife.setNextGenBit(0, 4, 1);
+    gameOfLife.setNextGenBit(0, 5, 0);
+    gameOfLife.setNextGenBit(0, 6, 1);
+    gameOfLife.setNextGenBit(0, 7, 0);
 
     // then
-    TEST_ASSERT_EQUAL(result, 7);
+    TEST_ASSERT_EQUAL(gameOfLife.nextGenData[0][0], 0b10101010);
 }
 
 int main(int argc, char **argv) {
     UNITY_BEGIN();
 
-    RUN_TEST(test_getNumber_should_return_number_seven);
+    RUN_TEST(setNextGenBit_should_set_given_value_on_the_given_position);
     
     UNITY_END();
 
