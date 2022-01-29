@@ -3,11 +3,6 @@
 
 #include <stdint.h>
 
-// #define DATA_ROWS 32 // Y
-// #define DATA_COLUMNS 64 // X
-// #define DATA_COLUMN_BYTES 8 // DATA_COLUMNS/8
-// #define DATA_COLORS 3
-
 template <uint8_t ROWS=32, uint8_t COLUMNS=64>
 class GameOfLife {
 
