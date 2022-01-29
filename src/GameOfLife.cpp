@@ -23,6 +23,19 @@ class GameOfLife {
     }
 
     /**
+     * Returns single bit from visual data array on a given position
+     * 
+     * @param yPos row position of the bit
+     * @param xPos column position of the bit
+     */
+    bool getVisualDataBit(uint8_t yPos, uint8_t xPos) {
+        uint8_t xBytePos = xPos / 8;
+        uint8_t xBit = xPos % 8;
+
+        return visualData[yPos][xBytePos] & (128 >> xBit);
+    }
+
+    /**
      * Set the bit on a given position to given value
      * 
      * @param yPos row position of the bit
