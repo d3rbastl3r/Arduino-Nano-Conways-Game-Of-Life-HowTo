@@ -54,12 +54,213 @@ void setNextGenBit_should_set_given_value_on_the_given_position() {
     TEST_ASSERT_EQUAL(gameOfLife.nextGenData[0][0], 0b10101010);
 }
 
+void countNeighbors_should_return_amount_of_neighbors_from_center_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010000},
+        {0b00000100},
+        {0b00101000},
+        {0b01001000},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01000000}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(3, 3);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 4);
+}
+
+void countNeighbors_should_return_amount_of_neighbors_from_n_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010000},
+        {0b00000100},
+        {0b00101000},
+        {0b01001000},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01001000}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(0, 3);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 1);
+}
+
+void countNeighbors_should_return_amount_of_neighbors_from_e_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010000},
+        {0b10000100},
+        {0b10101000},
+        {0b01001001},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01001000}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(2, 7);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 3);
+}
+
+void countNeighbors_should_return_amount_of_neighbors_from_s_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010000},
+        {0b10000100},
+        {0b10101000},
+        {0b01001001},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01001000}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(7, 2);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 3);
+}
+
+void countNeighbors_should_return_amount_of_neighbors_from_w_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010000},
+        {0b10000100},
+        {0b10101000},
+        {0b01001001},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01001000}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(3, 0);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 3);
+}
+
+void countNeighbors_should_return_amount_of_neighbors_from_ne_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010010},
+        {0b10000100},
+        {0b10101000},
+        {0b01001001},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01001001}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(0, 7);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 3);
+}
+
+void countNeighbors_should_return_amount_of_neighbors_from_se_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010010},
+        {0b10000100},
+        {0b10101000},
+        {0b01001001},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01001001}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(7, 7);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 1);
+}
+
+void countNeighbors_should_return_amount_of_neighbors_from_nw_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010010},
+        {0b10000100},
+        {0b10101000},
+        {0b01001001},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01001001}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(0, 0);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 4);
+}
+
+void countNeighbors_should_return_amount_of_neighbors_from_sw_pos() {
+    // given
+    uint8_t data[8][1] = {
+        {0b01010010},
+        {0b10000100},
+        {0b10101000},
+        {0b01001001},
+        {0b00010000},
+        {0b01000000},
+        {0b00001000},
+        {0b01001001}
+    };
+    GameOfLife<8, 8> gameOfLife(data);
+
+    // when
+    uint8_t neighborsResult = gameOfLife.countNeighbors(7, 0);
+
+    // then
+    TEST_ASSERT_EQUAL(neighborsResult, 3);
+}
+
 int main(int argc, char **argv) {
     UNITY_BEGIN();
 
     RUN_TEST(GameOfLifeConstructor_should_set_visual_data_ptr_correctly);
+
     RUN_TEST(getVisualDataBit_should_return_bit_from_given_position);
+
     RUN_TEST(setNextGenBit_should_set_given_value_on_the_given_position);
+
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_center_pos);
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_n_pos);
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_e_pos);
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_s_pos);
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_w_pos);
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_ne_pos);
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_se_pos);
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_nw_pos);
+    RUN_TEST(countNeighbors_should_return_amount_of_neighbors_from_sw_pos);
     
     UNITY_END();
 
